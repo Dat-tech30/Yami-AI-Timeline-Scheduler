@@ -11,7 +11,10 @@ Google AI Studio and also on this repository for you to see on this commit. Than
 import os
 import google.generativeai as genai
 
-genai.configure(api_key=os.environ["your_own_API_key"])
+with open("api_key.txt", "r") as f:
+    api_key = f.read().strip()
+
+genai.configure(api_key="my api key")
 
 # Create the model
 generation_config = {
