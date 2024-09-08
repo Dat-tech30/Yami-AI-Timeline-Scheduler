@@ -11,6 +11,7 @@ Google AI Studio and also on this repository for you to see on this commit. Than
 import os
 import google.generativeai as genai
 
+# This code reads the API key from the file 'api_key.txt' and configures the 'genai' library to utilize with interaction with the AI model
 with open("api_key.txt", "r") as f:
     api_key = f.read().strip()
 
