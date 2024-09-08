@@ -39,6 +39,15 @@ chat_session = model.start_chat(
   ])
 
 
-response = chat_session.send_message("INSERT_INPUT_HERE")
 
-print(response.text)
+# Start a conversation
+'''
+- Creating an infinite loop with 'While' until it is stopped manually or encounters a error
+- Getting user Input from the user to then storing it
+- send_message method of the chat_session object passing the input as an argument
+- chat_session object handles the interaction with the AI model and continues the loop indefinitely
+'''
+while True:
+    user_input = input("You: ")
+    response = chat_session.send_message(user_input)
+    print("YAMI:", response.text)
