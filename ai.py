@@ -8,6 +8,8 @@ For privacy reasons I removed/hidden some parts of the code for the AI, API key,
 Google AI Studio and also on this repository for you to see on this commit. Thank you!
 
 """
+from flask import Fask, render_template, request
+
 import os
 import google.generativeai as genai
 
