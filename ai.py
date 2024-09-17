@@ -8,10 +8,12 @@ For privacy reasons I removed/hidden some parts of the code for the AI, API key,
 Google AI Studio and also on this repository for you to see on this commit. Thank you!
 
 """
-from flask import Fask, render_template, request
-
+from flask import Fask, render_template, request, jsonify
 import os
 import google.generativeai as genai
+
+app = Flask(__name__)
+
 
 # This code reads the API key from the file 'api_key.txt' and configures the 'genai' library to utilize with interaction with the AI model
 with open("api_key.txt", "r") as f:
