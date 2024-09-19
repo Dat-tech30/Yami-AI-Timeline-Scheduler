@@ -2,17 +2,22 @@
 Install the Google AI Python SDK
 
 $ pip install google-generativeai
+
+pip install Flask flask-socketio gevent
 """
 """
 For privacy reasons I removed/hidden some parts of the code for the AI, API key, and training for YAMI, however all code here is publicly free from
 Google AI Studio and also on this repository for you to see on this commit. Thank you!
 
 """
-from flask import Fask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify
+from flask_socketio import SocketIO, emit
+import gevent
 import os
 import google.generativeai as genai
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 
 # This code reads the API key from the file 'api_key.txt' and configures the 'genai' library to utilize with interaction with the AI model
@@ -43,7 +48,18 @@ chat_session = model.start_chat(
    # Chat history is here where I trained the AI model (YAMI)
   ])
 
+@app.route("/")
+def index():
+    return render_template("index.html")
 
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_input = request.json["message"]
+    response = chat_session.send_message(user_input)
+    return jsonify({"response": response.text})
+
+if __name__ == "__main__":
+    socketio.run(app, debug=True)
 
 # Start a conversation
 '''
@@ -52,7 +68,7 @@ chat_session = model.start_chat(
 - send_message method of the chat_session object passing the input as an argument
 - chat_session object handles the interaction with the AI model and continues the loop indefinitely
 '''
-while True:
+'''while True:
     user_input = input("You: ")
     response = chat_session.send_message(user_input)
-    print("YAMI:", response.text)
+    print("YAMI:", response.text)'''
